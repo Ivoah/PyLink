@@ -28,9 +28,9 @@
     <body>
         <h1>Ivoah.net URL shortener</h1>
         <table>
-            <tr><th>Referer</th><th>User-Agent</th><th>Time</th></tr>
-            %for hit in hits:
-                <tr><td>{{hit['Referer']}}</td><td>{{hit['User-Agent']}}</td><td>{{hit['time'].humanize()}}</td></tr>
+            <tr><th>Short-code</th><th>Destination</th><th>Created</th><th>Stats</th></tr>
+            %for url in urls:
+                <tr><td>{{url}}</td><td><a href="{{urls[url]['url']}}">{{urls[url]['url']}}</a></td><td>{{urls[url]['created'].humanize()}}</td><td><a href=/stats/{{url}}>stats</a></td></tr>
             %end
         </table>
     </body>

@@ -20,7 +20,6 @@ def favicon():
 
 @get('/<short>')
 def short(short):
-    print(request.headers)
     if short in urls:
         urls[short]['hits'].append({
             'Referer': request.headers.get('Referer'),
@@ -38,6 +37,10 @@ def stats(short):
     else:
         abort(404, 'bad link')
 
+@get('/urls')
+def get_urls():
+    return template('urls.tpl', urls = urls)
+
 @post('/')
 def shorten():
     url = request.forms.get('url')
@@ -45,7 +48,8 @@ def shorten():
     short = ''.join(random.choice(string.ascii_letters) for i in range(10))
     urls[short] = {
         'url': url,
-        'hits': []
+        'hits': [],
+        'created': arrow.now()
     }
     return template('main.tpl', origin = request.headers.get('origin'), short = short)
 
