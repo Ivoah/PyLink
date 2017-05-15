@@ -17,7 +17,7 @@
             }
 
             table {
-                display: inline-block;
+                margin: auto;
             }
 
             th, td {
@@ -29,7 +29,7 @@
         <h1>Ivoah.net URL shortener</h1>
         <table>
             <tr><th>Referer</th><th>User-Agent</th><th>Time</th></tr>
-            %for hit in hits:
+            %for hit in url['hits']:
                 <tr><td>{{hit['Referer']}}</td><td>{{hit['User-Agent']}}</td><td>{{hit['time'].humanize()}}</td></tr>
             %end
         </table>

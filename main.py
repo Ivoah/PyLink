@@ -33,7 +33,7 @@ def short(short):
 @get('/stats/<short>')
 def stats(short):
     if short in urls:
-        return template('stats.tpl', hits = urls[short]['hits'])
+        return template('stats.tpl', url = urls[short])
     else:
         abort(404, 'bad link')
 
