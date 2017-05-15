@@ -12,7 +12,7 @@ urls = {}
 
 @get('/')
 def main():
-    return template('main.tpl', short = None)
+    return template('main.tpl')
 
 @get('/favicon.ico')
 def favicon():
@@ -20,6 +20,7 @@ def favicon():
 
 @get('/<short>')
 def short(short):
+    print(request.headers)
     if short in urls:
         urls[short]['hits'].append({
             'Referer': request.headers.get('Referer'),
@@ -40,6 +41,7 @@ def stats(short):
 @post('/')
 def shorten():
     url = request.forms.get('url')
+    if not url: return template('main.tpl', error = 'Please enter a URL')
     short = ''.join(random.choice(string.ascii_letters) for i in range(10))
     urls[short] = {
         'url': url,
